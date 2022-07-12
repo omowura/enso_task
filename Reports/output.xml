@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.13 on win32)" generated="20220710 15:02:20.107" rpa="false" schemaversion="3">
+<suite id="s1" name="apiTask" source="C:\Users\omowu\PycharmProjects\apiTest\apiTask.robot">
+<test id="s1-t1" name="Get population for states in the USA" line="15">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${params}</var>
+<arg>drilldowns=State</arg>
+<arg>measures=Population</arg>
+<arg>year=latest</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220710 15:02:20.993" level="INFO">${params} = {'drilldowns': 'State', 'measures': 'Population', 'year': 'latest'}</msg>
+<status status="PASS" starttime="20220710 15:02:20.993" endtime="20220710 15:02:20.993"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${GLOBAL_SECTION}</arg>
+<arg>/about/api/data?</arg>
+<arg>${params}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220710 15:02:20.996" level="FAIL">Non-existing index or alias 'https://datausa.io'.</msg>
+<status status="FAIL" starttime="20220710 15:02:20.995" endtime="20220710 15:02:20.996"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" starttime="20220710 15:02:21.000" endtime="20220710 15:02:21.000"/>
+</kw>
+<kw name="Dictionaries Should Be Equal" library="Collections">
+<arg>${params}</arg>
+<arg>${response.json()}[args}</arg>
+<doc>Fails if the given dictionaries are not equal.</doc>
+<status status="NOT RUN" starttime="20220710 15:02:21.002" endtime="20220710 15:02:21.002"/>
+</kw>
+<status status="FAIL" starttime="20220710 15:02:20.991" endtime="20220710 15:02:21.004">Non-existing index or alias 'https://datausa.io'.</status>
+</test>
+<doc>Tests for REST API to query data from USA</doc>
+<status status="FAIL" starttime="20220710 15:02:20.112" endtime="20220710 15:02:21.007"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="apiTask">apiTask</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
